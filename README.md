@@ -42,6 +42,15 @@
 
 详见 [11h-7-12月方案.md](11h-7-12月方案.md)。
 
+## 学习日历（Web）
+
+月视图打卡、任务划掉、日/月/阶段百分制得分。
+
+- **在线**：https://470111.github.io/22408-kaoyan-study/calendar/（推送后约 1–2 分钟生效）
+- **本地**：`cd calendar && npm install && npm run dev`
+
+详见 [calendar/README.md](calendar/README.md)。
+
 ## 快速开始（今天）
 
 1. **[基线测评](01-baseline/基线测评指南.md)** — **5.31 前完成**
