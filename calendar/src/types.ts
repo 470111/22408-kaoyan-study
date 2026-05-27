@@ -24,4 +24,5 @@ export interface ScheduleData {
 export interface StudyState {
   completed: Record<string, boolean>;
   basicUnlockedRound2: boolean;
+  focusMinutes: Record<string, number>;
 }

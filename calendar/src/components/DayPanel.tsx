@@ -1,5 +1,6 @@
 import { dayScore, PHASE_LABELS, SUBJECT_LABELS } from '../scoring';
 import type { DayData, Subject, StudyState } from '../types';
+import { FocusTimer } from './FocusTimer';
 
 const ORDER: Subject[] = ['math', '408', 'english', 'politics'];
 
@@ -8,9 +9,10 @@ interface Props {
   day: DayData | undefined;
   state: StudyState;
   onToggle: (id: string) => void;
+  onAddFocus: (dateStr: string, minutes: number) => void;
 }
 
-export function DayPanel({ dateStr, day, state, onToggle }: Props) {
+export function DayPanel({ dateStr, day, state, onToggle, onAddFocus }: Props) {
   if (!dateStr || !day) {
     return (
       <div className="panel">
@@ -56,6 +58,12 @@ export function DayPanel({ dateStr, day, state, onToggle }: Props) {
           ))}
         </div>
       ))}
+      <FocusTimer
+        dateStr={dateStr}
+        plannedHours={day.tasks.reduce((s, t) => s + t.duration, 0)}
+        savedMinutes={state.focusMinutes[dateStr] ?? 0}
+        onSessionEnd={(m) => onAddFocus(dateStr, m)}
+      />
     </div>
   );
 }
