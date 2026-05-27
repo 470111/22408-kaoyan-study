@@ -3,6 +3,7 @@ import { computeAchievements } from '../mountain/achievements';
 import { computeAltitude } from '../mountain/computeAltitude';
 import type { ScheduleData, StudyState } from '../types';
 import { AchievementList } from './AchievementList';
+import { AnimatedNumber } from './AnimatedNumber';
 import { FocusTimer } from './FocusTimer';
 import { MountainScene } from './MountainScene';
 
@@ -46,13 +47,22 @@ export function MountainView({ schedule, state, focusDate, onAddFocus }: Props) 
         />
       </div>
 
-      <div className="mountain-main">
-        <aside className="mountain-stats">
+      <div className="mountain-hero">
+        <MountainScene
+          altitude={stats.altitude}
+          recentInactive={stats.recentInactive}
+          streakGlowing={stats.currentStreak >= 7}
+        />
+        <aside className="mountain-stats-glass">
           <div className="altitude-big">
             <span className="label">海拔</span>
-            <span className="value">{stats.altitude}%</span>
+            <span className="value">
+              <AnimatedNumber value={stats.altitude} suffix="%" />
+            </span>
           </div>
-          <p className="camp-name">{stats.currentCamp}</p>
+          <p className="camp-name" key={stats.currentCamp}>
+            {stats.currentCamp}
+          </p>
           <dl className="stat-dl">
             <dt>连续活跃</dt>
             <dd>{stats.currentStreak} 天</dd>
@@ -66,12 +76,6 @@ export function MountainView({ schedule, state, focusDate, onAddFocus }: Props) 
             </dd>
           </dl>
         </aside>
-
-        <MountainScene
-          altitude={stats.altitude}
-          recentInactive={stats.recentInactive}
-          streakGlowing={stats.currentStreak >= 7}
-        />
       </div>
 
       <div className="mountain-bottom">
@@ -80,21 +84,30 @@ export function MountainView({ schedule, state, focusDate, onAddFocus }: Props) 
           <div className="score-bar-row">
             <span>学习进度 (50%)</span>
             <div className="bar-track">
-              <div className="bar-fill progress" style={{ width: `${stats.progressScore}%` }} />
+              <div
+                className="bar-fill progress"
+                style={{ '--bar-target': `${stats.progressScore}%` } as React.CSSProperties}
+              />
             </div>
             <span>{stats.progressScore}%</span>
           </div>
           <div className="score-bar-row">
             <span>打卡频率 (30%)</span>
             <div className="bar-track">
-              <div className="bar-fill frequency" style={{ width: `${stats.frequencyScore}%` }} />
+              <div
+                className="bar-fill frequency"
+                style={{ '--bar-target': `${stats.frequencyScore}%` } as React.CSSProperties}
+              />
             </div>
             <span>{stats.frequencyScore}%</span>
           </div>
           <div className="score-bar-row">
             <span>专注时间 (20%)</span>
             <div className="bar-track">
-              <div className="bar-fill focus" style={{ width: `${stats.focusScore}%` }} />
+              <div
+                className="bar-fill focus"
+                style={{ '--bar-target': `${stats.focusScore}%` } as React.CSSProperties}
+              />
             </div>
             <span>{stats.focusScore}%</span>
           </div>

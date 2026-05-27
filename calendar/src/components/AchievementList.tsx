@@ -9,8 +9,12 @@ export function AchievementList({ achievements }: Props) {
     <div className="achievement-list">
       <h3>里程碑</h3>
       <ul>
-        {achievements.map((a) => (
-          <li key={a.id} className={a.unlocked ? 'unlocked' : 'locked'}>
+        {achievements.map((a, i) => (
+          <li
+            key={a.id}
+            className={a.unlocked ? 'unlocked' : 'locked'}
+            style={{ '--i': i } as React.CSSProperties}
+          >
             <span className="achievement-icon">{a.unlocked ? '✓' : '○'}</span>
             <div>
               <strong>{a.name}</strong>

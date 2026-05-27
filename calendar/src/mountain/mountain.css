@@ -1,0 +1,517 @@
+/* Mountain page layout */
+.mountain-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mountain-timer-row .focus-timer {
+  background: var(--surface);
+  border: 1px solid #2a384d;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-top: 0;
+  border-top: none;
+}
+
+.mountain-hero {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  min-height: 420px;
+  border: 1px solid #2a384d;
+}
+
+.mountain-scene {
+  min-height: 420px;
+  background: #0f1419;
+}
+
+.mountain-scene.foggy .mountain-svg {
+  filter: brightness(0.88);
+}
+
+.mountain-scene.foggy .fog-layer {
+  animation: fogDrift 6s ease-in-out infinite;
+}
+
+.mountain-scene.glow .summit-glow {
+  animation: summitGlow 3s ease-in-out infinite;
+}
+
+.mountain-svg {
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  display: block;
+}
+
+/* SVG layer animations */
+.star {
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+.cloud {
+  animation: cloudDrift 28s linear infinite;
+}
+
+.climber-body {
+  animation: climberIdle 2s ease-in-out infinite;
+  transform-origin: 0 0;
+}
+
+.camp-reached .camp-dot {
+  fill: #e8b86d;
+  animation: campPulse 2s ease-in-out infinite;
+}
+
+.camp-pending .camp-dot {
+  fill: #5a6a80;
+}
+
+.camp-reached .camp-flag {
+  animation: campPulse 2s ease-in-out infinite;
+}
+
+.trail-progress {
+  transition: stroke-dashoffset 0.05s linear;
+}
+
+.summit-glow {
+  pointer-events: none;
+}
+
+.snow-particle {
+  animation: snowFall 4s linear infinite;
+}
+
+.fog-layer {
+  fill: #8b9cb3;
+  opacity: 0.2;
+}
+
+/* Glass stats overlay */
+.mountain-stats-glass {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 2;
+  background: rgba(26, 35, 50, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(108, 140, 255, 0.25);
+  border-radius: 12px;
+  padding: 1rem 1.15rem;
+  min-width: 168px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+.altitude-big {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+}
+
+.altitude-big .label {
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.altitude-big .value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.1;
+  text-shadow: 0 0 24px rgba(108, 140, 255, 0.4);
+}
+
+.camp-name {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  color: #e8b86d;
+  animation: fadeSlide 0.5s ease-out;
+}
+
+.stat-dl {
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+.stat-dl dt {
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
+
+.stat-dl dd {
+  margin: 0.15rem 0 0;
+  font-weight: 600;
+}
+
+@media (max-width: 700px) {
+  .mountain-hero {
+    min-height: 360px;
+  }
+
+  .mountain-scene,
+  .mountain-svg {
+    min-height: 360px;
+  }
+
+  .mountain-stats-glass {
+    position: relative;
+    top: auto;
+    left: auto;
+    margin: 0;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid #2a384d;
+  }
+
+  .mountain-hero {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}
+
+.mountain-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 800px) {
+  .mountain-bottom {
+    grid-template-columns: 1fr;
+  }
+}
+
+.score-bars,
+.achievement-list {
+  background: var(--surface);
+  border: 1px solid #2a384d;
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.score-bars h3,
+.achievement-list h3 {
+  margin: 0 0 0.75rem;
+  font-size: 0.9rem;
+}
+
+.score-bar-row {
+  display: grid;
+  grid-template-columns: 1fr 120px 2.5rem;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.bar-track {
+  height: 10px;
+  background: var(--surface2);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 5px;
+  width: 0;
+  animation: barGrow 0.8s ease-out forwards;
+  position: relative;
+  overflow: hidden;
+}
+
+.bar-fill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2.5s ease-in-out infinite;
+}
+
+.bar-fill.progress {
+  background: var(--math);
+  animation-delay: 0s;
+}
+
+.bar-fill.frequency {
+  background: #7bc96f;
+  animation-delay: 0.1s;
+}
+
+.bar-fill.focus {
+  background: #e8b86d;
+  animation-delay: 0.2s;
+}
+
+.score-bar-row:nth-child(2) .bar-fill {
+  animation-delay: 0.05s;
+}
+.score-bar-row:nth-child(3) .bar-fill {
+  animation-delay: 0.15s;
+}
+.score-bar-row:nth-child(4) .bar-fill {
+  animation-delay: 0.25s;
+}
+
+.achievement-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.achievement-list li {
+  display: flex;
+  gap: 0.65rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #2a384d;
+  font-size: 0.8rem;
+  opacity: 0;
+  animation: achievementItemIn 0.45s ease-out forwards;
+  animation-delay: calc(var(--i, 0) * 0.05s);
+}
+
+.achievement-list li:last-child {
+  border-bottom: none;
+}
+
+.achievement-list li.locked {
+  animation-name: achievementItemInLocked;
+}
+
+.achievement-list li.unlocked {
+  animation-name: achievementItemIn, achievementPop;
+  animation-duration: 0.45s, 0.5s;
+  animation-delay: calc(var(--i, 0) * 0.05s), calc(var(--i, 0) * 0.05s + 0.2s);
+  animation-fill-mode: forwards, forwards;
+}
+
+.achievement-list li.unlocked .achievement-icon {
+  color: #7bc96f;
+}
+
+.achievement-list p {
+  margin: 0.15rem 0 0;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.achievement-icon {
+  flex-shrink: 0;
+  width: 1.25rem;
+  text-align: center;
+}
+
+/* Focus timer running state */
+.focus-timer.running .focus-timer-display-wrap {
+  position: relative;
+}
+
+.focus-timer.running .focus-timer-display {
+  color: var(--accent);
+  text-shadow: 0 0 20px rgba(108, 140, 255, 0.5);
+}
+
+.focus-timer.running .focus-timer-display-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -8px -12px;
+  border-radius: 12px;
+  border: 2px solid rgba(108, 140, 255, 0.35);
+  animation: pulseRing 2s ease-out infinite;
+  pointer-events: none;
+}
+
+/* Keyframes */
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes cloudDrift {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(40px);
+  }
+}
+
+@keyframes fogDrift {
+  0%,
+  100% {
+    opacity: 0.12;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.22;
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes summitGlow {
+  0%,
+  100% {
+    opacity: 0.1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.22;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes snowFall {
+  0% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(280px);
+    opacity: 0;
+  }
+}
+
+@keyframes climberIdle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes campPulse {
+  0%,
+  100% {
+    opacity: 0.85;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes barGrow {
+  from {
+    width: 0;
+  }
+  to {
+    width: var(--bar-target, 100%);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes achievementItemIn {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes achievementItemInLocked {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 0.45;
+    transform: translateX(0);
+  }
+}
+
+@keyframes achievementPop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulseRing {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.08);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .star,
+  .cloud,
+  .climber-body,
+  .camp-reached .camp-dot,
+  .camp-reached .camp-flag,
+  .summit-glow,
+  .snow-particle,
+  .fog-layer,
+  .bar-fill,
+  .bar-fill::after,
+  .achievement-list li,
+  .focus-timer.running .focus-timer-display-wrap::before {
+    animation: none !important;
+  }
+
+  .trail-progress {
+    transition: none;
+  }
+
+  .achievement-list li {
+    opacity: 1;
+  }
+
+  .achievement-list li.locked {
+    opacity: 0.45;
+  }
+
+  .bar-fill {
+    width: var(--bar-target, 100%) !important;
+  }
+}

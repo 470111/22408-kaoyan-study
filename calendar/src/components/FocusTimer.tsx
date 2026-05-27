@@ -23,9 +23,11 @@ export function FocusTimer({ dateStr, plannedHours, savedMinutes, onSessionEnd }
   const plannedMin = Math.round(plannedHours * 60);
 
   return (
-    <div className="focus-timer">
+    <div className={`focus-timer ${status === 'running' ? 'running' : ''}`}>
       <h3>专注计时</h3>
-      <div className="focus-timer-display">{displayLabel}</div>
+      <div className="focus-timer-display-wrap">
+        <div className="focus-timer-display">{displayLabel}</div>
+      </div>
       <div className="focus-timer-meta">
         <span>本次</span>
         <span>
