@@ -21,7 +21,7 @@
 | [05-politics](05-politics/) | **10.11起**政治冲刺 | 暂停至10.10 |
 | [06-real-exam](06-real-exam/) | 9–10月真题轮次表 | 9.1 – 10.31 |
 | [07-mock](07-mock/) | 11月模考与择校 | 11.1 – 12.19 |
-| [08-goals](08-goals/) | 三档目标与院校 | 全程 |
+| [08-goals](08-goals/) | 三档目标、院校、[软院上岸概率问卷](08-goals/中科大软院上岸概率问卷.md) | 全程 |
 | [11h-7-12月方案.md](11h-7-12月方案.md) | 11h 分配与恢复节奏 | 7.1 – 12.19 |
 
 ## 每日时间分配（6 月 · 8h，无政治）
@@ -46,7 +46,7 @@
 
 月视图打卡、任务划掉、日/月/阶段百分制得分。
 
-- **在线**：https://470111.github.io/22408-kaoyan-study/calendar/（推送后约 1–2 分钟生效）
+- **在线**：https://470111.github.io/22408-kaoyan-study/calendar/（需先在仓库 Settings → Pages 启用 `gh-pages` 分支，见 [calendar/README.md](calendar/README.md)）
 - **本地**：`cd calendar && npm install && npm run dev`
 
 详见 [calendar/README.md](calendar/README.md)。
@@ -57,6 +57,7 @@
 2. [08-goals/三档目标与院校清单.md](08-goals/三档目标与院校清单.md) — 填写院校
 3. **逐日任务**：[数学408-6月每日细表.md](数学408-6月每日细表.md)（从 5.26 或当前日行开始）
 4. [每日打卡.md](每日打卡.md) — 6月8h / 7月起11h
+5. **[中科大软院上岸概率问卷](08-goals/中科大软院上岸概率问卷.md)** — 填表手算今年软院录取概率（建议模考后重填）
 
 ## 里程碑速查
 

@@ -3,45 +3,38 @@ name: Deploy Calendar to GitHub Pages
 on:
   push:
     branches: [master]
-    paths:
-      - 'calendar/**'
-      - 'scripts/parse-schedule.mjs'
-      - '数学408-*.md'
-      - '.github/workflows/deploy-calendar.yml'
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
 concurrency:
-  group: pages
+  group: pages-calendar
   cancel-in-progress: true
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Install and build
-        run: |
-          cd calendar
-          npm install
-          npm run build
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: calendar/dist
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Build calendar
+        run: |
+          node scripts/parse-schedule.mjs
+          cd calendar
+          npm ci
+          npm run build
+
+      - name: Deploy to gh-pages (subpath /calendar)
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./calendar/dist
+          destination_dir: calendar
+          commit_message: 'deploy: calendar'
